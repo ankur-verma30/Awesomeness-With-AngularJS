@@ -1,6 +1,13 @@
 <div>
-    <button>
-        <img src="" alt="">
-        <span>NAME</span>
-    </button>
+  <button (click)="onSelectUser()">
+    <!-- property binding in img tag -->
+    <!-- This binds the src attribute of the <img> tag to the selectedUsers.avatar property of the component -->
+    <img
+      [src]="imagePath" 
+      [alt]="name" 
+    />
+    <!-- imagePath() is also the singal due to computed method -->
+    <!-- using string interpolation we can write any public property of the component class-->
+    <span>{{ name }}</span>
+  </button>
 </div>

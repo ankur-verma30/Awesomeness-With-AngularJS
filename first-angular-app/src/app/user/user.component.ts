@@ -1,12 +1,18 @@
-import { Component } from '@angular/core';
-import { DUMMY_USERS } from '../dummy-users';
-const randomNumber= Math.floor(Math.random()*DUMMY_USERS.length);
+import { Component, Input } from '@angular/core';
+
 @Component({
   selector: 'app-user',
   imports: [],
   templateUrl: './user.component.html',
-  styleUrl: './user.component.css'
+  styleUrl: './user.component.css',
 })
 export class UserComponent {
-selectedUser=DUMMY_USERS[randomNumber]; //whatever property we are defining in the class will be available in the template
+  @Input() avatar!: string;
+  @Input() name!: string;
+
+  get imagePath() {
+    return 'assets/users/' + this.avatar;
+  }
+
+  onSelectUser() {}
 }
