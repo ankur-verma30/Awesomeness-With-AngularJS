@@ -28,7 +28,7 @@
       />
     </li>
     <li>
-      <app-user
+      <app-user  
         [id]="users[3].id"
         [avatar]="users[3].avatar"
         [name]="users[3].name"
@@ -36,5 +36,5 @@
       />
     </li>
   </ul>
-  TASKS OF THAT USER
+  <app-tasks [name]="selectedUser.name"/>
 </main>

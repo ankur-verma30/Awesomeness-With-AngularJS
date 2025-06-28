@@ -10,20 +10,14 @@ export class UserComponent {
   @Input({ required: true }) id!: string;
   @Input({ required: true }) avatar!: string;
   @Input({ required: true }) name!: string;
-  //The name should describe the custom event you plan on emitting
-  @Output() select = new EventEmitter();
-  // avatar=input.required<string>(); //input is a generic function
-  // name=input.required<string>();//this is signal input
+
+  @Output() select = new EventEmitter<string>();//generic type can be introduced for extra type saftey nothing else
 
   get imagePath() {
     return 'assets/users/' + this.avatar;
   }
-  // imagePath=computed(()=>'assets/users/' + this.avatar())
 
   onSelectUser() {
-    // this.avatar.set() this will give an error because the property taken with the help of the input is readonly and cannot be set inside the class
-
     this.select.emit(this.id);
-    // pass the information that a specific user was selected to the component that's using the userComponent
   }
 }
