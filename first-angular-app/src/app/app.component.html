@@ -2,39 +2,23 @@
 <!-- if tag have no content between them can be written as self closing tags -->
 <main>
   <ul id="users">
+    @for(user of users;track user.id){
     <li>
-      <app-user
-        [id]="users[0].id"
-        [avatar]="users[0].avatar"
-        [name]="users[0].name"
-        (select)="onSelectUser($event)"
-      />
-      <!-- The "$event" variable is not just available when working with custom events! It can also used on built-in-events(like "click") to get hold of potentially emitted values. -->
+      <!-- used in the latest version 17 or above -->
+      <!-- <li *ngFor="let user of users"> -->
+      <app-user [user]="user" (select)="onSelectUser($event)" />
     </li>
-    <li>
-      <app-user
-        [id]="users[1].id"
-        [avatar]="users[1].avatar"
-        [name]="users[1].name"
-        (select)="onSelectUser($event)"
-      />
-    </li>
-    <li>
-      <app-user
-        [id]="users[2].id"
-        [avatar]="users[2].avatar"
-        [name]="users[2].name"
-        (select)="onSelectUser($event)"
-      />
-    </li>
-    <li>
-      <app-user  
-        [id]="users[3].id"
-        [avatar]="users[3].avatar"
-        [name]="users[3].name"
-        (select)="onSelectUser($event)"
-      />
-    </li>
+    }
   </ul>
-  <app-tasks [name]="selectedUser.name"/>
+
+  <!-- The "$event" variable is not just available when working with custom events! It can also used on built-in-events(like "click") to get hold of potentially emitted values. -->
+  @if(selectedUser){
+  <app-tasks [userId]="selectedUser.id" [name]="selectedUser!.name" />
+  <!-- <app-tasks *ngIf="selectedUser; else fallback" [name]="selectedUser!.name" /> -->
+  }@else {
+  <p id="fallback">Select a user to see the task</p>
+  <!-- <ng-template #fallback>
+     <p  id="fallback">Select a user to see the task</p>
+   </ng-template> -->
+  }
 </main>
