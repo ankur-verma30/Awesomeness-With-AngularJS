@@ -1,0 +1,93 @@
+🔧 Topic: Styling the Header Component in Angular
+
+✅ 1. Current Status
+You've created a basic Angular component (HeaderComponent) and linked its template using templateUrl.
+
+It renders successfully, but there's no styling yet, so the UI looks very plain.
+
+🎨 2. Adding Styles to Angular Component
+The standard Angular convention is to keep styles in a separate file.
+For this component, you create a CSS file:
+
+header.component.css
+This follows the Angular naming pattern (component-name.component.css).
+
+🧭 3. Linking the CSS File to the Component
+Add the following in your component metadata:
+
+@Component({
+  selector: 'app-header',
+  templateUrl: './header.component.html',
+  styleUrl: './header.component.css', // note plural: style**Urls**
+  standalone: true
+})
+styleUrls is an array that can accept multiple CSS file paths.
+
+Alternative (Not Recommended)
+styles (inline CSS as an array of strings):
+
+styles: [`
+  h1 {
+    color: red;
+  }
+`]
+❌ Discouraged just like inline templates – harder to maintain, clutters the TypeScript file.
+
+📦 4. Assets & External Files
+styles.css – a global stylesheet (replaces default Angular styles).
+index.html – updated HTML file that links Google Fonts.
+
+🖼️ 5. Using the Image in the Component
+Update header.component.html:
+<header>
+  <img src="assets/task-management-logo.png" alt="A todo list" />
+  <div>
+    <h1>EasyTask</h1>
+    <p>Enterprise-level task management without friction.</p>
+  </div>
+</header>
+✅ img element uses relative path: Angular serves files inside the assets folder publicly.
+✅ alt is important for accessibility and SEO.
+
+⚠️ 6. angular.json Configuration Check
+To ensure Angular serves your assets correctly:
+
+Open angular.json
+Ensure the "assets" array contains:
+
+"assets": [
+  "src/assets",
+  "src/favicon.ico"
+]
+
+If missing, add src/assets to the array. Without this, Angular won’t include your image files in the build output.
+
+🧵 7. Global vs Component Styles
+Global styles (src/styles.css) affect the whole app.
+
+Component styles (header.component.css) are scoped only to that component.
+
+Hence, you're asked to:
+Replace the default styles.css with the provided one for global consistency.
+
+Update index.html to import fonts from Google Fonts.
+
+🌍 8. index.html Fonts (Google Fonts)
+Update index.html with links to Google Fonts:
+<link href="https://fonts.googleapis.com/css2?family=YourFontHere&display=swap" rel="stylesheet">
+Angular uses this index.html as the root HTML document.
+
+This improves typography globally across your app.
+
+✅ 9. Final HTML Structure in the Header Component
+<header>
+  <img src="assets/task-management-logo.png" alt="A todo list" />
+  <div>
+    <h1>EasyTask</h1>
+    <p>Enterprise-level task management without friction.</p>
+  </div>
+</header>
+Wrapped the h1 inside a <div> for better layout control with CSS.
+Added a <p> tag as a subheading.
+
+

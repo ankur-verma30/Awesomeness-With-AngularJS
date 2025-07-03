@@ -1,0 +1,101 @@
+🔹 1. Building Custom Components is Common
+
+Angular applications are built using a Component-based architecture.
+Every feature or UI block is typically a self-contained component.
+Therefore, it's very common to create multiple components as your project grows.
+
+🗂️ 2. Why Organizing Component Files is Important
+An Angular component usually consists of 4 files:
+| File              | Purpose                    |
+| ----------------- | -------------------------- |
+| `.ts`             | Logic and metadata         |
+| `.html`           | Template/UI markup         |
+| `.css` or `.scss` | Component-specific styling |
+| `.spec.ts`        | Testing (optional for now) |
+If you create many components and all their files are placed directly in src/app/, it becomes cluttered and hard to manage.
+
+📁 3. Use Subfolders per Component
+
+Best practice: Create a separate folder for each component under src/app/.
+
+src/
+└── app/
+    ├── header/
+    │   ├── header.component.ts
+    │   ├── header.component.html
+    │   ├── header.component.css
+
+Folder naming convention: Use the feature name or component purpose (header, user, task-list).    
+
+🛠️ 4. Update Import Paths After Moving
+After moving component files into a folder:
+Update the import in any file where the component is used.
+
+Example (before moving):
+import { HeaderComponent } from './header.component';
+
+After moving to header/:
+import { HeaderComponent } from './header/header.component';
+
+Most modern editors (like VS Code or WebStorm) auto-update paths, but double-check to avoid runtime errors.
+
+✨ 5. Using Angular CLI to Generate Components
+Angular CLI offers a faster, error-free way to scaffold components.
+
+Command Syntax: ng generate component <component-name>
+
+Or shorthand: ng g c <component-name>
+
+
+🧪 6. Example: Creating a UserComponent
+You want to create:
+A component named UserComponent
+Inside its own folder user/
+
+Command: ng g c user
+This will create:
+
+src/
+└── app/
+    └── user/
+        ├── user.component.ts
+        ├── user.component.html
+        ├── user.component.css
+        ├── user.component.spec.ts   <-- testing file
+
+✅ Automatically follows the Angular naming and structural conventions.
+
+📋 7. Understanding Each Generated File
+| File                     | Purpose                                  |
+| ------------------------ | ---------------------------------------- |
+| `user.component.ts`      | Contains logic and `@Component` metadata |
+| `user.component.html`    | UI layout for the user                   |
+| `user.component.css`     | Style specific to the user component     |
+| `user.component.spec.ts` | Testing file (not used immediately)      |
+
+
+🧹 8. Deleting Test Files Temporarily
+If you're not writing tests now, you can safely delete *.spec.ts files to reduce clutter.
+
+🧠 9. What the CLI Auto-Configures for You
+Inside user.component.ts, you’ll find:
+
+@Component({
+  selector: 'app-user',                    // custom HTML tag
+  templateUrl: './user.component.html',    // linked template
+  styleUrls: ['./user.component.css'],     // linked styles
+  standalone: true,                        // no need to declare in a module
+  imports: []                              // pre-added for future use
+})
+
+
+Explanation of properties:
+| Property           | Purpose                                                                  |
+| ------------------ | ------------------------------------------------------------------------ |
+| `selector`         | Tag used to place component in HTML                                      |
+| `templateUrl`      | Link to external HTML file                                               |
+| `styleUrls`        | Link(s) to CSS/SCSS file(s)                                              |
+| `standalone: true` | Makes it a **Standalone Component** (modern Angular practice)            |
+| `imports`          | Used if you want to use other components or directives in this component |
+
+✔️ If you're not using NgIf, NgFor, or other components inside this one, you can remove the imports: [] property safely.
